@@ -1,0 +1,28 @@
+Site_ID,Site_Number,Site_Location,Cluster_Name,Site_Acronym
+field_blank,26,field blank,NA,field
+lab_blank,27,laboratory blank,NA,lab
+R1,1,CAP canal above Waddell Canal,cap,cap-siphon
+R10,15,Salt River below Saguaro (Blue Point Bridge),salt,salt blw saguaro
+R11,16,CAP Canal at Cross-connect,cap,cap @ x con
+R12,17,AZ Canal above CAP Cross-connect,srp,az canal inflow
+R13,18,AZ Canal below CAP Cross-connect,srp,az canal blw cap
+R14,19,AZ Canal - Inlet to Squaw Peak WTP,srp,az canal @ squaw peak
+R15,20,Squaw Peak WTP treated water,srp,squaw peak-treated
+R16,21,AZ Canal - Inlet to Deer Valley WTP,srp,az canal @ deer valley
+R17,22,Deer Valley WTP treated water,srp,deer valley-treated
+R18,23,South Canal at Val Vista WTP,srp,s canal @ val vista
+R19,24,Val Vista WTP treated water,srp,val vista-treated
+R20,25,Verde River at Tangle,verde,verde abv horseshoe
+R2A,2,Lake Pleasant integrated sample,cap,pleasant-epi
+R2B,3,Lake Pleasant integrated sample,cap,pleasant-hypo
+R3,4,Waddell Canal,cap,waddell canal
+R4,5,Cap Canal at 7th St.,cap,cap @ 7th st
+R4-Dup,6,Cap Canal at 7th St.,cap,cap @ 7th st dup
+R5,7,Verde River btwn Horseshoe and Bartlett,verde,verde abv bartlett
+R6A,8,Bartlett Reservoir near outlet,verde,bartlett-epi
+R6B,9,Bartlett Reservoir near outlet,verde,bartlett-hypo
+R7,10,Verde River below Bartlett Reservoir,verde,verde blw barlett
+R8,11,Salt River inlet to Saguaro Lake,salt,salt abv saguaro
+R9A,12,Saguaro Lake near inlet,salt,saguaro-epi
+R9A-Dup,13,Saguaro Lake near inlet,NA,saguaro-epi dup
+R9B,14,Saguaro Lake near inlet,salt,saguaro-hypo

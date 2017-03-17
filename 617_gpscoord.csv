@@ -1,0 +1,33 @@
+ID,SiteNumber,SiteLocation,ClusterName,SiteAcronym,Date,Longitude,Latitude,Altitude
+1,R1,CAP canal above Waddell Canal,cap,cap-siphon,8/18/1999,W112o17.174,N33o46.893,1553
+2,R2A,Lake Pleasant integrated sample,cap,pleasant-epi,8/18/1999,W112o16.213,N33o51.105,2000
+3,R2B,Lake Pleasant integrated sample,cap,pleasant-hypo,8/18/1999,W112o16.213,N33o51.105,2000
+4,R3,Waddell Canal,cap,waddell canal,8/18/1999,W112o15.422,N33o47.897,1715
+5,R4,Cap Canal at 7th St.,cap,cap @ 7th st,8/18/1999,W112o03.935,N33o42.079,NA
+6,R5,Verde River btwn Horseshoe and Bartlett,verde,verde abv bartlett,8/16/1999,W111o42.280,N33o57.620,1757
+7,R6A,Bartlett Reservoir near outlet,verde,bartlett-epi,8/16/1999,W111o05.625,N34o00.000,1750
+8,R6B,Bartlett Reservoir near outlet,verde,bartlett-hypo,8/16/1999,W111o05.625,N34o00.000,1750
+9,R7,Verde River below Bartlett Reservoir,verde,verde blw barlett,8/16/1999,W111o38.595,N33o50.304,1554
+10,R8,Salt River inlet to Saguaro Lake,salt,salt abv saguaro,8/17/1999,W111o27.450,N33o33.349,1493
+11,R9A,Saguaro Lake near inlet,salt,saguaro-epi,8/17/1999,W111o32.229,N33.34.053,1493
+12,R9B,Saguaro Lake near inlet,salt,saguaro-hypo,8/17/1999,W111o32.229,N33.34.053,1493
+13,R10,Salt River below Saguaro (Blue Point Bridge),salt,salt blw saguaro,8/17/1999,W111o34.436,N33o33.335,1493
+14,R11,CAP Canal at Cross-connect,cap,cap @ x con,8/17/1999,W111o41.603,N33o30.858,1503
+15,R12,AZ Canal above CAP Cross-connect,srp,az canal inflow,8/17/1999,W111o41.589,N33o31.022,1761
+16,R13,AZ Canal below CAP Cross-connect,srp,az canal blw cap,8/17/1999,W111o42.028,N33o30.941,1761
+17,R14,AZ Canal - Inlet to Squaw Peak WTP,srp,az canal @ squaw peak,8/18/1999,NA,NA,NA
+18,R15,Squaw Peak WTP treated water,srp,squaw peak-treated,8/18/1999,NA,NA,NA
+19,R16,AZ Canal - Inlet to Deer Valley WTP,srp,az canal @ deer valley,8/17/1999,NA,NA,NA
+20,R17,Deer Valley WTP treated water,srp,deer valley-treated,8/17/1999,NA,NA,NA
+21,R18,South Canal at Val Vista WTP,srp,s canal @ val vista,8/18/1999,NA,NA,NA
+22,R19,Val Vista WTP treated water,srp,val vista-treated,8/18/1999,NA,NA,NA
+23,R20,Verde River at Tangle,verde,verde abv horseshoe,8/25/1999,NA,NA,NA
+24,R21,AZ Canal - Central Avenue,az canal,az canal - cent,7/1/2002,NA,NA,NA
+25,R22,AZ Canal at 56th,az canal,az canal - 56th st,7/1/2002,NA,NA,NA
+26,R25,Verde River at Beeline,az canal,az canal - verde river @ beeline,10/28/2000,NA,NA,NA
+27,Pima,AZ Canal at Pima Rd,az canal,az canal - pima,7/1/2002,NA,NA,NA
+28,HOC,Head of the Consolidated canal,az canal,az canal- head of the consolidated canal,10/31/2011,NA,NA,NA
+29,MOC,Middle of the Consolidated canal,az canal,az canal - middle of the consolidated canal,10/31/2011,NA,NA,NA
+30,SOCA,South Canal below CAP Cross-connect,srp,south tempe canals - below CAP Cross-connect,1/14/2003,NA,NA,NA
+31,HTC,Head of the Tempe Canal,tempe,south tempe canals - head of the tempe canal,1/14/2003,NA,NA,NA
+32,Hav,Lake Havasu,reservoir,lake havasu,1/14/2003,NA,NA,NA
