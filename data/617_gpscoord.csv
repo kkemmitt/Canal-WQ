@@ -9,8 +9,8 @@ ID,SiteNumber,SiteLocation,ClusterName,SiteAcronym,Date,Longitude,Latitude,Altit
 8,R6B,Bartlett Reservoir near outlet,verde,bartlett-hypo,8/16/1999,W111o05.625,N34o00.000,1750
 9,R7,Verde River below Bartlett Reservoir,verde,verde blw barlett,8/16/1999,W111o38.595,N33o50.304,1554
 10,R8,Salt River inlet to Saguaro Lake,salt,salt abv saguaro,8/17/1999,W111o27.450,N33o33.349,1493
-11,R9A,Saguaro Lake near inlet,salt,saguaro-epi,8/17/1999,W111o32.229,N33.34.053,1493
-12,R9B,Saguaro Lake near inlet,salt,saguaro-hypo,8/17/1999,W111o32.229,N33.34.053,1493
+11,R9A,Saguaro Lake near inlet,salt,saguaro-epi,8/17/1999,W111o32.229,N33o34.053,1493
+12,R9B,Saguaro Lake near inlet,salt,saguaro-hypo,8/17/1999,W111o32.229,N33o34.053,1493
 13,R10,Salt River below Saguaro (Blue Point Bridge),salt,salt blw saguaro,8/17/1999,W111o34.436,N33o33.335,1493
 14,R11,CAP Canal at Cross-connect,cap,cap @ x con,8/17/1999,W111o41.603,N33o30.858,1503
 15,R12,AZ Canal above CAP Cross-connect,srp,az canal inflow,8/17/1999,W111o41.589,N33o31.022,1761
