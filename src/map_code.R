@@ -104,9 +104,11 @@ ggmap(arizona) +
 ###new map with only data from sites with DO meters####
 coords<-read.csv("coordinates_from_Andrew.csv")
 coords1<-coords[c(1,5,9,21,19,8),]
-arizona<-get_map(location=c(lon=-111.8, lat=33.4), zoom=9.5, maptype="satellite")
+arizona<-get_map(location=c(lon=-111.8, lat=33.4), zoom=11, maptype="satellite")
+library(ggrepel)
 ggmap(arizona) +
-  geom_point(data = coords1, aes(x = coords.x1, y = coords.x2, na.rm=T), size=3.0)+
+  geom_point(data = coords1, aes(x = coords.x1, y = coords.x2), size=5.0, color="yellow", shape=2)+
+  geom_text_repel(data = coords1, aes(x=coords.x1, y=coords.x2, label=Name), vjust=1.0,hjust=0, size=4, color="white")+
   xlab("Longitude")+
   ylab("Latitude")
 
