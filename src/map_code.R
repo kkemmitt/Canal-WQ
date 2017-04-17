@@ -59,7 +59,7 @@ data[32,8]=34.500866
 data[26,7]="NA" #not sure where this site is
 data[26,8]="NA" #not sure where this site is
 # Get a map
-arizona <- get_map(location = c(lon = -112.0728, lat = 33.5), zoom = 9.8)
+arizona <- get_map(location = c(lon = -112.0728, lat = 33.5), zoom = 9, maptype = "satellite")
 
 ggmap(arizona) +
   geom_point(data = data, aes(x = Longitude, y = Latitude, shape=ClusterName, na.rm=T), show.legend = T)+
@@ -78,3 +78,37 @@ plot(data$Tot_N ~ data$Date)
 ggplot(aes(Tot_N, data=data), geom=boxplot, color=Site_Acronym)
 ggplot(data, aes(x=Date, y=Tot_N))+ geom_point()
 ggplot(data, aes(x=Tot_P, y=Tot_N))+ geom_point()
+
+##using kml file 
+library(maptools)
+library(sp)
+library(rgdal)
+library(wesanderson)
+
+setwd("C:/Users/Katie Kemmitt/OneDrive/Research/Drinking-Water-Canal-Data/data")
+
+##------making map by exporting coordinates from kml file-----##
+ogrListLayers(dsn="Regional Drinking Water Quality Map.kml") # to find the layer name
+data1 <- readOGR(dsn="Regional Drinking Water Quality Map.kml")
+summary(data1) # file with data
+write.csv(data1, "coordinates_from_Andrew.csv")
+dat<-read.csv("coordinates_from_Andrew.csv")
+arizona <- get_map(location = c(lon = -111.95, lat = 33.6), zoom = 10, maptype = "satellite")
+
+ggmap(arizona) +
+  geom_point(data = dat, aes(x = coords.x1, y = coords.x2, colour=Type, shape=Type, na.rm=T), size=3.0)+
+  scale_color_manual(values=wes_palette(n=3, name="Darjeeling"))+
+  xlab("Longitude")+
+  ylab("Latitude")
+
+###new map with only data from sites with DO meters####
+coords<-read.csv("coordinates_from_Andrew.csv")
+coords1<-coords[c(1,5,9,21,19,8),]
+arizona<-get_map(location=c(lon=-111.8, lat=33.4), zoom=9.5, maptype="satellite")
+ggmap(arizona) +
+  geom_point(data = coords1, aes(x = coords.x1, y = coords.x2, na.rm=T), size=3.0)+
+  xlab("Longitude")+
+  ylab("Latitude")
+
+  
+
