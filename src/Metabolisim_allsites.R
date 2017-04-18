@@ -1,4 +1,5 @@
 ###Load in sensor and weather data for all sites###
+setwd("C:/Users/Katie Kemmitt/OneDrive/Research/Drinking-Water-Canal-Data/data")
 library(streamMetabolizer)
 
 ######################merge bp data with sensor data################
@@ -18,22 +19,27 @@ newdat<- total[, c("Sensor.Name", "Parameter", "Sensor.Reading", "Reading.Date",
 prac<-spread(total, Parameter, Sensor.Reading) #convert from long to wide
 write.csv(prac, file = "Sensor.Readings.Presssure.csv")
 
-### convert sensor data date to correct format ###
-prac$Reading.Date<-as.POSIXct(prac$Reading.Date, format = "%m/%d/%Y %H:%M", tz='Etc/GMT+7')
-lubridate::tz(prac$Reading.Date)#checking that time is in right tz
-(prac$posix.time.solar <- streamMetabolizer::calc_solar_time(prac$Reading.Date, longitude=-106.3))
 
 
 
 ##########convert %DO to mg##########33
 
+
+
+
+####function to calculate o2 saturation at 100%###
+prac<-read.csv("Sensor.Readings.Presssure.csv")
+### convert sensor data date to correct format ###
+prac$Reading.Date<-as.POSIXct(prac$Reading.Date, format = "%m/%d/%Y %H:%M", tz='Etc/GMT+7')
+lubridate::tz(prac$Reading.Date)#checking that time is in right tz
+(prac$solar.time <- streamMetabolizer::calc_solar_time(prac$Reading.Date, longitude=-106.3))
+
 #rename columns to match function 
 names(prac)[names(prac)=="DO"] <- "perc.sat" 
 names(prac)[names(prac)=="Temp"] <- "temp"
 names(prac)[names(prac)=="press.avg.mbar"] <- "measured.atmP"
+prac$perc.sat[prac$perc.sat < 0] <- NA # get rid of any negative perc.sat values
 
-
-####function to calculate o2 saturation at 100%###
 
 O2.saturation<-function(salinity, temp, measured.atmP, perc.sat) {
   
@@ -69,3 +75,61 @@ O2.saturation<-function(salinity, temp, measured.atmP, perc.sat) {
   output<-data.frame(salinity, temp, measured.atmP, perc.sat, umoleO2.per.L, mgO2.per.L, pO2.torr, pO2.mbar, pO2.kPa)
   print(output)
 }
+
+
+#####for loop to calculate 100 percent oxygen sat concentration####
+#too big to run all at once so subset data by site to###
+SOCA <- prac[ which(prac$Sensor.Name=='Wql_030002_Probe1'),] #SOCA is site name used by CAP
+
+attach(SOCA)
+salinity=3 ##guestimate of freshwater salinity
+perc.sat=100
+o2.sat.100<-c()
+
+for(i in 1:nrow(SOCA))
+{
+  temp[i]<-SOCA[i,]$temp
+  measured.atmP[i]<-SOCA[i,]$measured.atmP
+  o2.sat.100<-O2.saturation(salinity, temp, measured.atmP, perc.sat)
+  
+  
+}
+
+SOCA$o2.sat.100<-o2.sat.100$mgO2.per.L #insert calculations into dataframe
+SOCA$o2.mg.L<- (SOCA$perc.sat * SOCA$o2.sat.100)/100
+SOCA$depth=4 #assume canals are ~4 ft deep 
+SOCA$light=900 #need light data, will use this for now but should replace later with real values
+
+names(SOCA)[names(SOCA)=="o2.sat.100"] <- "DO.sat"
+names(SOCA)[names(SOCA)=="o2.mg.L"] <- "DO.obs"
+names(SOCA)[names(SOCA)=="posix.time.solar"]<-"solar.time"
+names(SOCA)[names(SOCA)=="temp"]<-"temp.water"
+
+
+O2dataSOCA<-SOCA[, c("solar.time", "DO.obs", "DO.sat", "depth", "temp.water", "light")]
+O2dataSOCA<-arrange(O2dataSOCA, solar.time)
+O2dataSOCA<-O2dataSOCA[-3778,] #delete weird data
+
+
+##########start model--maximum likelihood###
+library(streamMetabolizer)
+
+mm_name(type='mle')
+
+mle_name <- mm_name(type='mle')
+mle_name
+
+mle_specs <- specs(mle_name)
+mle_specs
+
+mle_fit <- metab(mle_specs, data=test)
+met_preds <- predict_metab(mle_fit)# plot of GPP values from model 
+plot(O2dataSOCA$DO.obs ~ O2dataSOCA$solar.time)
+
+plot_metab_preds(mle_fit)
+
+plot_DO_preds(mle_fit)
+
+library(ggplot2)
+ggplot(prac, aes(x=solar.time, y=perc.sat, color=Sensor.Name))+
+  geom_line()

@@ -51,6 +51,7 @@ O2.saturation<-function(salinity, temp, measured.atmP, perc.sat) {
 }
 
 #######MY AMAZING FOR LOOP that takes data from spreadsheet and calculates conc DO at 100 percent saturation####
+attach(data)
 salinity=3 ##guestimate of freshwater salinity
 perc.sat=100
 o2.sat.100<-c()
