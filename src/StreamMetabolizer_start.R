@@ -103,21 +103,15 @@ O2.saturation<-function(salinity, temp, measured.atmP, perc.sat) {
 }
 
 
-#rename columns so they match stream metabolizer code
-#might need to manually do this, got messed up the first time
-names(data)[names(data)=="temp"] <- "temp.water"
-names(data)[names(data)=="posix.time.solar"] <- "solar.time"
-
 #######MY AMAZING FOR LOOP that takes data from spreadsheet and calculates conc DO at 100 percent saturation####
+attach(data) ###need to do this 
 salinity=3 ##guestimate of freshwater salinity
 perc.sat=100
 o2.sat.100<-c()
-for(i in 1:nrow(data))
-{
+for(i in 1:nrow(data)){
   temp[i]<-data[i,]$temp
   measured.atmP[i]<-data[i,]$measured.atmP
   o2.sat.100<-O2.saturation(salinity, temp, measured.atmP, perc.sat)
-  
   
 }
 
@@ -129,10 +123,12 @@ data$light=900
 
 names(data)[names(data)=="o2.sat.100"] <- "DO.sat"
 names(data)[names(data)=="o2.mg.L"] <- "DO.obs"
+names(data)[names(data)=="posix.time.solar"]<-"solar.time"
+names(data)[names(data)=="temp"]<-"temp.water"
 
 O2data<-data[, c("solar.time", "DO.obs", "DO.sat", "depth", "temp.water", "light")]
 
-##########start model
+##########start model--maximum likelihood###
 
 mm_name(type='mle')
 
@@ -143,8 +139,22 @@ mle_specs <- specs(mle_name)
 mle_specs
 
 mle_fit <- metab(mle_specs, data=O2data)
-mle_fit
+met_preds <- predict_metab(mle_fit)# plot of GPP values from model 
+plot(met_preds$GPP ~ met_preds$date)
 
 plot_metab_preds(mle_fit)
 
 plot_DO_preds(mle_fit)
+
+####bayesian model###
+bayes_name <- mm_name(
+  type='bayes', pool_K600='none', 
+  err_obs_iid=TRUE, err_proc_acor=FALSE, err_proc_iid=TRUE, 
+  ode_method='trapezoid')
+bayes_specs <- specs(bayes_name)
+bayes_specs <- revise(bayes_specs, burnin_steps=100, saved_steps=200, n_cores=1, GPP_daily_mu=3, GPP_daily_sigma=2)
+bayes_fit <- metab(bayes_specs, data=O2data)
+predict_metab(bayes_fit) %>% 
+  lapply(function(col) if(is.numeric(col)) round(col, 2) else col ) %>%
+  as.data.frame() %>%
+  knitr::kable()

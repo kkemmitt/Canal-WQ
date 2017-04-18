@@ -108,7 +108,7 @@ arizona<-get_map(location=c(lon=-111.8, lat=33.4), zoom=11, maptype="satellite")
 library(ggrepel)
 ggmap(arizona) +
   geom_point(data = coords1, aes(x = coords.x1, y = coords.x2), size=5.0, color="yellow", shape=2)+
-  geom_text_repel(data = coords1, aes(x=coords.x1, y=coords.x2, label=Name), vjust=1.0,hjust=0, size=4, color="white")+
+  geom_label_repel(data = coords1, aes(x=coords.x1, y=coords.x2, label=Name),size=3, color="black")+
   xlab("Longitude")+
   ylab("Latitude")
 
